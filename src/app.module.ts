@@ -1,13 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { GoogleAuthModule} from './api/google/google.module';
-import { GoogleStrategy } from './startegys/google.strategy';
-import { AppConfig } from './config/config.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+
+import AppConfigService, * as ConfigurationUtils from '~/config';
+import Controllers from '~/controllers';
+import Services from './services';
 
 @Module({
-  imports: [GoogleAuthModule],
-  controllers: [AppController],
-  providers: [AppService, GoogleStrategy, AppConfig],
+  imports: [
+    ConfigModule.forRoot({
+      load: [ConfigurationUtils.loadConfig],
+      isGlobal: true,
+    }),
+    ...Services,
+  ],
+  controllers: [...Controllers],
+  providers: [AppConfigService, ...Services],
 })
 export class AppModule {}
