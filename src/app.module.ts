@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 import AppConfigService, * as ConfigurationUtils from '~/config';
 import Controllers from '~/controllers';
+import { DatabaseModule } from './database/database.module';
 import Services from './services';
 
 @Module({
@@ -13,7 +13,7 @@ import Services from './services';
       isGlobal: true,
     }),
     ...Services,
-    TypeOrmModule.forRoot()
+    DatabaseModule
   ],
   controllers: [...Controllers],
   providers: [AppConfigService, ...Services],

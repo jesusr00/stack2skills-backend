@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AppConfig, AuthConfig, HttpConfig } from './types/ConfigType';
+import { AppConfig, AuthConfig, DatabaseConfig, HttpConfig } from './types/ConfigType';
 
 @Injectable()
 class AppConfigService {
@@ -16,6 +16,10 @@ class AppConfigService {
 
   get auth(): AuthConfig {
     return this.configService.get('auth');
+  }
+
+  get database(): DatabaseConfig {
+    return this.configService.get('database');
   }
 }
 
