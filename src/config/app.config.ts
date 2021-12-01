@@ -1,10 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AppConfig, AuthConfig, DatabaseConfig, HttpConfig } from './types/ConfigType';
+import {
+  AppConfig,
+  AuthConfig,
+  DatabaseConfig,
+  HttpConfig,
+} from './types/ConfigType';
 
 @Injectable()
 class AppConfigService {
   constructor(private configService: ConfigService) {}
+
+  /**
+   * Indicates if the application is in development mode.
+   * @returns A boolean value indicating whether the application is running in development mode.
+   */
+  isDevelopment(): boolean {
+    return this.app.env === 'development';
+  }
 
   get app(): AppConfig {
     return this.configService.get('app');
@@ -19,7 +32,14 @@ class AppConfigService {
   }
 
   get database(): DatabaseConfig {
-    return this.configService.get('database');
+    return {
+      type: 'postgres',
+      host: this.configService.get('app.database.host'),
+      port: this.configService.get('app.database.port'),
+      username: this.configService.get('app.database.username'),
+      password: this.configService.get('app.database.password'),
+      database: this.configService.get('app.database.database'),
+    };
   }
 }
 

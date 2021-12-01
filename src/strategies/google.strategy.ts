@@ -1,11 +1,11 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 import { Injectable } from '@nestjs/common';
-import AppConfig from '~/config';
+import { AppConfigService } from '~/config';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
-  constructor(private appConfig: AppConfig) {
+  constructor(private appConfig: AppConfigService) {
     super({
       clientID: appConfig.auth.google.clientId,
       clientSecret: appConfig.auth.google.secret,

@@ -8,7 +8,7 @@ export type AppConfig = {
   /**
    * Environment
    */
-  NODE_ENV: 'production' | 'development' | 'staging';
+  env: 'production' | 'development' | 'staging';
   url: string;
 };
 
@@ -26,11 +26,11 @@ export type AuthConfig = {
 };
 
 export type DatabaseConfig = {
-  type : string;
-  host : string;
-  port : number;
-  username : string;
-  password : string;
-  database : string;
-}
+  type: 'postgres';
+  host: string;
+  port: number;
+  username: string;
+  password: string;
+  database: string;
+};
 export default ConfigType;
