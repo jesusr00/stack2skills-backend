@@ -5,11 +5,12 @@ import ConfigModule from '~/config';
 import Controllers from '~/controllers';
 import { DatabaseModule } from './database/database.module';
 import Services from './services';
+import { GoogleStrategy } from './strategies/google.strategy';
 
 @Module({
   imports: [ConfigModule, ...Services, DatabaseModule],
   controllers: [...Controllers],
-  providers: [AppConfigService, ...Services],
+  providers: [AppConfigService, ...Services, GoogleStrategy],
   exports: [...Services],
 })
 export class AppModule {}
