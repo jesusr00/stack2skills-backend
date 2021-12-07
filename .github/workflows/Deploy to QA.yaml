@@ -1,0 +1,100 @@
+name: Cloud Run Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  SERVICE_NAME: staging-stack2skills
+  REGION: us-east1
+  PROJECT_NAME: stack2skills
+  REGISTRY_BASE: us-east1-docker.pkg.dev/${{ secrets.PROJECT_ID }}
+  NODE_ENV: staging
+  URL: https://google.com
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+        with:
+          fetch-depth: 1
+
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GAR
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_BASE }}
+          username: _json_key
+          password: ${{ secrets.GCP_SA_JSON_KEY }}
+
+      - name: Setup env
+        env:
+          NODE_ENV: ${{ env.NODE_ENV }}
+          URL: ${{ env.URL }}
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
+          AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
+        run: eval "echo \"$(cat config.example.yaml)\"" > config.yaml
+
+      - name: Docker Build & Push Action
+        uses: mr-smithers-excellent/docker-build-push@v5.6
+        id: docker_build
+        with:
+          image: ${{ env.SERVICE_NAME }}
+          tags: ${{ github.sha }}
+          registry: ${{ env.REGISTRY_BASE }}/${{ env.PROJECT_NAME }}
+          username: _json_key
+          password: ${{ secrets.GCP_SA_JSON_KEY }}
+
+      # - name: Build and push
+      #   id: docker_build
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     push: true
+      #     tags: ${{ env.REGISTRY_BASE }}/${{ env.PROJECT_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      - name: Image digest
+        run: |
+          echo ${{ steps.docker_build.outputs.imageFullName }}
+          echo ${{ steps.docker_build.outputs.imageName }}
+
+      - name: Setup Cloud Run manifest
+        env:
+          IMAGE: ${{ steps.docker_build.outputs.imageFullName }}:${{ github.sha }}
+          SERVICE_NAME: ${{ env.SERVICE_NAME }}
+          NODE_ENV: ${{ env.NODE_ENV}}
+          REGION: ${{ env.REGION }}
+          CPU: 1000m
+          MEMORY: 256Mi
+          maxScale: '1'
+          minScale: '0'
+          containerConcurrency: 80
+          ingress: internal-and-cloud-load-balancing
+          CLOUD_SQL_INSTANCE: ${{ secrets.CLOUD_SQL_INSTANCE }}
+          VPC_ACCESS_CONNECTOR: ${{ secrets.VPC_ACCESS_CONNECTOR }}
+        run: eval "echo \"$(cat service.yaml)\"" > service.yaml
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0.4.0'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_JSON_KEY }}'
+
+      - id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0.6.0
+        with:
+          metadata: service.yaml
+          region: ${{ env.REGION }}
+
+      - id: test_url
+        run: curl "${{ steps.deploy.outputs.url }}"

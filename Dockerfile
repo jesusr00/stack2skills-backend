@@ -16,6 +16,6 @@ WORKDIR /app
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules/ ./node_modules/
-COPY config.yaml config.yaml
+COPY config.yaml ./
 
 CMD ["node", "dist/main.js"]

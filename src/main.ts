@@ -7,6 +7,6 @@ async function bootstrap() {
 
   const config = app.get(AppConfigService);
 
-  await app.listen(config.http.port, config.http.host);
+  await app.listen(process.env.PORT || config.http.port, config.http.host);
 }
 bootstrap();
