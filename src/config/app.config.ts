@@ -34,11 +34,11 @@ class AppConfigService {
   get database(): DatabaseConfig {
     return {
       type: 'postgres',
-      host: this.configService.get('app.database.host'),
-      port: this.configService.get('app.database.port'),
-      username: this.configService.get('app.database.username'),
-      password: this.configService.get('app.database.password'),
-      database: this.configService.get('app.database.database'),
+      host: this.configService.get('database.host'),
+      port: this.configService.get('database.port'),
+      username: this.configService.get('database.username'),
+      password: this.configService.get('database.password'),
+      database: this.configService.get('database.database'),
     };
   }
 }
