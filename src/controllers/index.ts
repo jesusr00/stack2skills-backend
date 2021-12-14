@@ -1,3 +1,4 @@
 import GoogleController from './auth/google.controller';
+import GlobalConfigController from './global-config/globalConfig.controller';
 
-export default [GoogleController];
+export default [GoogleController, GlobalConfigController];
