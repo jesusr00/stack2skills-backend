@@ -12,7 +12,7 @@ class GoogleController {
     //disable typescript-eslint/no-empty-function
   }
 
-  @Get('redirect')
+  @Get('callback')
   @UseGuards(AuthGuard('google'))
   googleAuthRedirect(@Req() req: Request) {
     return this.googleService.googleLogin(req);

@@ -11,7 +11,7 @@ env:
   PROJECT_NAME: stack2skills
   REGISTRY_BASE: us-east1-docker.pkg.dev/${{ secrets.PROJECT_ID }}
   NODE_ENV: staging
-  URL: https://google.com
+  URL: https://staging-stack2skills-yfmnwrj6gq-ue.a.run.app/
 
 jobs:
   build:
