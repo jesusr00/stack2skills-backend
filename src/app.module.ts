@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-
 import AppConfigService from '~/config';
 import ConfigModule from '~/config';
 import Controllers from '~/controllers';
