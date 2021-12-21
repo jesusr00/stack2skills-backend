@@ -1,4 +1,10 @@
-import { BaseEntity, Column, PrimaryGeneratedColumn, Entity, OneToMany } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  OneToMany,
+} from 'typeorm';
 import RepositorySource from '../repository-source/repository-source.entity';
 
 @Entity()
@@ -9,8 +15,11 @@ class Organization extends BaseEntity {
   @Column()
   name: string;
 
-  @OneToMany(()=> RepositorySource, repositorySource => repositorySource.organization)
-  repositorySources : RepositorySource[];
+  @OneToMany(
+    () => RepositorySource,
+    (repositorySource) => repositorySource.organization,
+  )
+  repositorySources: RepositorySource[];
 }
 
 export default Organization;

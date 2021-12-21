@@ -10,6 +10,7 @@ export type AppConfig = {
    */
   env: 'production' | 'development' | 'staging';
   url: string;
+  frontend: string;
 };
 
 export type HttpConfig = {
@@ -23,6 +24,9 @@ export type AuthConfig = {
     secret: string;
   };
   microsoft: null;
+  jwt: {
+    secret: string;
+  };
 };
 
 export type DatabaseConfig = {

@@ -5,7 +5,7 @@ import Organization from './organization.entity';
 import OrganizationDTO from '~/models/organization.dto';
 
 @Injectable()
-class RepositoryService{
+class RepositoryService {
   constructor(
     @Inject(ORGANIZATIONS_REPOSITORY)
     private repository: Repository<Organization>,
@@ -16,12 +16,12 @@ class RepositoryService{
   }
 
   async findbyId(organizationId: string): Promise<Organization | undefined> {
-    return await this.repository.findOne({ where: { id: organizationId} });
+    return await this.repository.findOne({ where: { id: organizationId } });
   }
 
   //async delete(): Promise<boolean> {}
 
-  async create(organization : OrganizationDTO): Promise<Organization> {
+  async create(organization: OrganizationDTO): Promise<Organization> {
     return await this.repository.save(organization);
   }
 }

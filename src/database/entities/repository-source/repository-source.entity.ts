@@ -1,4 +1,10 @@
-import { BaseEntity, Column, PrimaryGeneratedColumn, Entity, ManyToOne } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  ManyToOne,
+} from 'typeorm';
 import Organization from '../organization/organization.entity';
 
 @Entity()
@@ -18,7 +24,10 @@ class RepositorySource extends BaseEntity {
   @Column()
   type: string; // Aqui hay q cambiar a RepoType
 
-  @ManyToOne( ()=> Organization, organization => organization.repositorySources)
+  @ManyToOne(
+    () => Organization,
+    (organization) => organization.repositorySources,
+  )
   organization: Organization;
 }
 

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../../database.module';
 import { RepositorySourceProvider } from './repository-source.provider';
 import RepositorySourceService from './repository-source.service';
