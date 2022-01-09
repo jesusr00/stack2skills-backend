@@ -1,9 +1,10 @@
 import GoogleController from './auth/google.controller';
 import GlobalConfigController from './global-config/globalConfig.controller';
-import RepositoySourceController from './repository-source/repository-source.controller';
+import RepositorySourceController from './repository-source';
+
 
 export default [
   GoogleController,
   GlobalConfigController,
-  RepositoySourceController,
+  RepositorySourceController,
 ];

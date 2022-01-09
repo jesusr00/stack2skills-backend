@@ -4,7 +4,7 @@ import { RepositorySourceProvider } from './repository-source.provider';
 import RepositorySourceService from './repository-source.service';
 
 @Module({
-  imports: [forwardRef(() => DatabaseModule)],
+  imports: [DatabaseModule],
   providers: [...RepositorySourceProvider, RepositorySourceService],
   exports: [RepositorySourceService],
 })

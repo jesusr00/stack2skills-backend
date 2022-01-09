@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { REPOSITORYS_SOURCE_REPOSITORY } from './repository-source.provider';
 import RepositorySource from './repository-source.entity';
-import { RepositorySourceDTO } from '~/database/dto/repository-source.dto';
+import { RepositorySourceDTO } from '~/models';
 
 @Injectable()
 class RepositoryService {
