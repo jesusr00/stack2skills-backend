@@ -4,7 +4,7 @@ import { AccountProvider } from './account.provider';
 import AccountService from './account.service';
 
 @Module({
-  imports: [forwardRef(() => DatabaseModule)],
+  imports: [DatabaseModule],
   providers: [...AccountProvider, AccountService],
   exports: [AccountService],
 })
