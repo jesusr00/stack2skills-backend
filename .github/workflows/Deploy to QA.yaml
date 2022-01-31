@@ -12,6 +12,7 @@ env:
   REGISTRY_BASE: us-east1-docker.pkg.dev/${{ secrets.PROJECT_ID }}
   NODE_ENV: staging
   URL: https://staging-stack2skills-yfmnwrj6gq-ue.a.run.app/
+  FRONTEND: http://localhost:3000/
 
 jobs:
   build:
@@ -39,6 +40,7 @@ jobs:
         env:
           NODE_ENV: ${{ env.NODE_ENV }}
           URL: ${{ env.URL }}
+          FRONTEND: ${{ env.FRONTEND }}
           DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
           DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
