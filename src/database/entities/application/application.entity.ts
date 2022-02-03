@@ -3,12 +3,12 @@ import {
   Column,
   PrimaryGeneratedColumn,
   Entity,
-  OneToMany,
+  OneToOne,
 } from 'typeorm';
 import RepositorySource from '../repository-source/repository-source.entity';
 
 @Entity()
-class Organization extends BaseEntity {
+class Application extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -18,11 +18,11 @@ class Organization extends BaseEntity {
   @Column()
   description?: string;
 
-  @OneToMany(
-    () => RepositorySource,
-    (repositorySource) => repositorySource.organization,
-  )
-  repositorySources: RepositorySource[];
+  @Column()
+  repoUrl: string;
+
+  @OneToOne(() => RepositorySource)
+  source: RepositorySource;
 }
 
-export default Organization;
+export default Application;

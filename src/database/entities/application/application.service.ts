@@ -1,14 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { ACCOUNTS_REPOSITORY } from './account.provider';
-import Account from './account.entity';
-import CreateAccountDto from '~/dtos/create-account.dto';
+import { APPLICATIONS_REPOSITORY } from './application.provider';
+import Application from './application.entity';
+import CreateApplicationDto from '~/dtos/create-application.dto';
 
 @Injectable()
 class AccountService {
   constructor(
-    @Inject(ACCOUNTS_REPOSITORY)
-    private repository: Repository<Account>,
+    @Inject(APPLICATIONS_REPOSITORY)
+    private repository: Repository<Application>,
   ) {}
 
   /**
@@ -16,7 +16,7 @@ class AccountService {
    * @returns All accounts in the database
    */
 
-  findAll(): Promise<Account[]> {
+  findAll(): Promise<Application[]> {
     return this.repository.find();
   }
 
@@ -38,7 +38,7 @@ class AccountService {
     );
   }
 
-  async findOne(email: string): Promise<Account | undefined> {
+  async findOne(email: string): Promise<Application | undefined> {
     return this.repository.findOne({
       where: {
         email,
@@ -50,12 +50,7 @@ class AccountService {
     throw new Error('Method not implemented.');
   }
 
-  /**
-   *
-   * @param newAccount New account details
-   * @returns A promise returned by the user
-   */
-  async create(newAccount: CreateAccountDto): Promise<Account> {
+  async create(newAccount: CreateApplicationDto): Promise<Application> {
     return this.repository.create(newAccount);
   }
 }

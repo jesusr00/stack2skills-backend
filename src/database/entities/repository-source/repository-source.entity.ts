@@ -5,6 +5,7 @@ import {
   Entity,
   ManyToOne,
 } from 'typeorm';
+import RepoTypes from '~/database/models/repo-type';
 import Organization from '../organization/organization.entity';
 
 @Entity()
@@ -16,13 +17,13 @@ class RepositorySource extends BaseEntity {
   name: string;
 
   @Column()
-  host: string;
+  url: string;
 
   @Column()
   accessToken: string;
 
   @Column()
-  type: string; // Aqui hay q cambiar a RepoType
+  type: RepoTypes;
 
   @ManyToOne(
     () => Organization,

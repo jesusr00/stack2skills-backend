@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { AccountService } from '~/database/entities';
 import Account from '~/database/entities/account/account.entity';
+import JwtService from '~/modules/auth/services/jwt.service';
 
 @Injectable()
 export default class GoogleService {
@@ -31,8 +31,7 @@ export default class GoogleService {
       });
     }
 
-    const payload = { email: account.email, sub: account.id };
-    const accessToken = this.jwtService.sign(payload);
+    const accessToken = this.jwtService.signAccount(account);
 
     return {
       message: 'User information from google',

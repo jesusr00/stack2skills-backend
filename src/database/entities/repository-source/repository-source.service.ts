@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { REPOSITORYS_SOURCE_REPOSITORY } from './repository-source.provider';
 import RepositorySource from './repository-source.entity';
-import { RepositorySourceDTO } from '~/models';
+import CreateRepositorySourceDto from '~/dtos/create-repository-source.dto';
 
 @Injectable()
 class RepositoryService {
@@ -21,7 +21,9 @@ class RepositoryService {
 
   //async delete(): Promise<boolean> {}
 
-  async create(newRepoDTO: RepositorySourceDTO): Promise<RepositorySource> {
+  async create(
+    newRepoDTO: CreateRepositorySourceDto,
+  ): Promise<RepositorySource> {
     return await this.repository.save(newRepoDTO);
   }
 }

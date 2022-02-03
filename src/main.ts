@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
@@ -9,6 +10,7 @@ async function bootstrap() {
   const config = app.get(AppConfigService);
 
   app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Stack2Skills')

@@ -16,7 +16,7 @@ class AppConfigService {
    * @returns A boolean value indicating whether the application is running in development mode.
    */
   isDevelopment(): boolean {
-    return this.app.env === 'development';
+    return !this.app.env || this.app.env.toLowerCase() === 'development';
   }
 
   get app(): AppConfig {

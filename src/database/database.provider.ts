@@ -14,7 +14,7 @@ export const databaseProviders = [
         username: configService.database.username,
         password: configService.database.password,
         database: configService.database.database,
-        synchronize: true /*configService.isDevelopment()*/,
+        synchronize: configService.isDevelopment(),
         entities: [__dirname + '/entities/**/*.entity{.ts,.js}'],
       }),
   },

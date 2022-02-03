@@ -13,6 +13,7 @@ env:
   NODE_ENV: staging
   URL: https://staging-stack2skills-yfmnwrj6gq-ue.a.run.app/
   FRONTEND: http://localhost:3000/
+  JWT_SECRET: palabrarandom
 
 jobs:
   build:

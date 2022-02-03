@@ -6,20 +6,19 @@ import { DatabaseModule } from './database/database.module';
 import DatabaseEntities from './database/entities';
 import Services from '~/services';
 import { GoogleStrategy } from './strategies/google.strategy';
-import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { AuthModule } from './modules';
 
 @Module({
   imports: [
+    PassportModule,
     ConfigModule,
     DatabaseModule,
     ...DatabaseEntities,
-    JwtModule.register({
-      secret: 'Stack2Skills',
-      signOptions: { expiresIn: '1h' },
-    }),
+    AuthModule,
   ],
   controllers: [...Controllers],
-  providers: [AppConfigService, ...Services, GoogleStrategy],
+  providers: [...Services, GoogleStrategy],
   exports: [...Services],
 })
 export class AppModule {}

@@ -1,9 +1,11 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { RepositorySourceService } from '~/database/entities/repository-source';
 import RepositorySource from '~/database/entities/repository-source/repository-source.entity';
-import { RepositorySourceDTO } from '~/models';
+import CreateRepositorySourceDto from '~/dtos/create-repository-source.dto';
 
 @Controller('repository')
+@ApiTags('Repository')
 class RepositorySourceController {
   constructor(private repositorySourceService: RepositorySourceService) {}
 
@@ -18,9 +20,8 @@ class RepositorySourceController {
   }
 
   @Post()
-  create(@Body() body): Promise<RepositorySource> {
-    const newRepository = body;
-    return this.repositorySourceService.create(newRepository);
+  create(@Body() body: CreateRepositorySourceDto): Promise<RepositorySource> {
+    return this.repositorySourceService.create(body);
   }
 }
 

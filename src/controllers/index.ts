@@ -1,11 +1,11 @@
 import GoogleController from './auth/google.controller';
-import GlobalConfigController from './global-config/globalConfig.controller';
+import ConfigController from './config/config.controller';
 import OrganizationController from './organization.controller';
 import RepositorySourceController from './repository-source.controller';
 
 export default [
   GoogleController,
-  GlobalConfigController,
+  ConfigController,
   RepositorySourceController,
   OrganizationController,
 ];

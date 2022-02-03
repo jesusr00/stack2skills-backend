@@ -18,3 +18,5 @@ auth:
     clientId: $AUTH_GOOGLE_CLIENT_ID
     secret: $AUTH_GOOGLE_CLIENT_SECRET
   microsoft:
+  jwt: 
+    secret: $JWT_SECRET
