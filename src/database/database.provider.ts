@@ -16,6 +16,7 @@ export const databaseProviders = [
         database: configService.database.database,
         synchronize: configService.isDevelopment(),
         entities: [__dirname + '/entities/**/*.entity{.ts,.js}'],
+        logging: configService.database.logging,
       }),
   },
 ];

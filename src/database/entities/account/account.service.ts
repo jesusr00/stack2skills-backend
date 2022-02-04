@@ -20,6 +20,14 @@ class AccountService {
     return this.repository.find();
   }
 
+  findById(id: string) {
+    return this.repository.findOne({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   /**
    *
    * @param email Email of the user to search
@@ -38,7 +46,7 @@ class AccountService {
     );
   }
 
-  async findOne(email: string): Promise<Account | undefined> {
+  async findByEmail(email: string): Promise<Account | undefined> {
     return this.repository.findOne({
       where: {
         email,
@@ -50,13 +58,9 @@ class AccountService {
     throw new Error('Method not implemented.');
   }
 
-  /**
-   *
-   * @param newAccount New account details
-   * @returns A promise returned by the user
-   */
   async create(newAccount: CreateAccountDto): Promise<Account> {
-    return this.repository.create(newAccount);
+    const account = this.repository.create(newAccount);
+    return this.repository.save(account);
   }
 }
 

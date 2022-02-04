@@ -1,4 +1,6 @@
-import { BaseEntity, Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity, ManyToMany } from 'typeorm';
+import BaseEntity from '../base.entity';
+import Organization from '../organization/organization.entity';
 
 @Entity()
 class Account extends BaseEntity {

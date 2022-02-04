@@ -1,5 +1,5 @@
-import OrganizationModule from './origanization.module';
-import OrganizationService from './origanization.service';
+import OrganizationModule from './organization.module';
+import OrganizationService from './organization.service';
 
 export default OrganizationModule;
 

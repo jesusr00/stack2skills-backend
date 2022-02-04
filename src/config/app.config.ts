@@ -39,6 +39,7 @@ class AppConfigService {
       username: this.configService.get('database.username'),
       password: this.configService.get('database.password'),
       database: this.configService.get('database.database'),
+      logging: this.configService.get<boolean>('database.logging', false),
     };
   }
 }

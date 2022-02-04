@@ -26,6 +26,7 @@ export type AuthConfig = {
   microsoft: null;
   jwt: {
     secret: string;
+    expiresIn: string;
   };
 };
 
@@ -36,5 +37,6 @@ export type DatabaseConfig = {
   username: string;
   password: string;
   database: string;
+  logging: boolean;
 };
 export default ConfigType;

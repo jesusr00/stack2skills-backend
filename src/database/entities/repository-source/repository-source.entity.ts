@@ -1,12 +1,7 @@
-import {
-  BaseEntity,
-  Column,
-  PrimaryGeneratedColumn,
-  Entity,
-  ManyToOne,
-} from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity, ManyToOne } from 'typeorm';
 import RepoTypes from '~/database/models/repo-type';
 import Organization from '../organization/organization.entity';
+import BaseEntity from '../base.entity';
 
 @Entity()
 class RepositorySource extends BaseEntity {

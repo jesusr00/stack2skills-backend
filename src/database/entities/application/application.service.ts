@@ -50,8 +50,9 @@ class AccountService {
     throw new Error('Method not implemented.');
   }
 
-  async create(newAccount: CreateApplicationDto): Promise<Application> {
-    return this.repository.create(newAccount);
+  async create(dto: CreateApplicationDto): Promise<Application> {
+    const application = this.repository.create(dto);
+    return this.repository.save(application);
   }
 }
 

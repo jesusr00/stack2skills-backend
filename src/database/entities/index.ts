@@ -11,9 +11,13 @@ import ApplicationModule, {
   ApplicationEntity,
   ApplicationService,
 } from './application';
-import OrganizationModule from './organization/origanization.module';
+import OrganizationRoleModule, {
+  OrganizationRoleEntity,
+  OrganizationRoleService,
+} from './organization-role';
+import OrganizationModule from './organization/organization.module';
 import OrganizationEntity from './organization/organization.entity';
-import OrganizationService from './organization/origanization.service';
+import OrganizationService from './organization/organization.service';
 
 export default [
   RepositorySoureModule,
@@ -21,6 +25,7 @@ export default [
   OrganizationModule,
   FrameworkModule,
   ApplicationModule,
+  OrganizationRoleModule,
 ];
 
 export {
@@ -34,4 +39,6 @@ export {
   FrameworkEntity,
   ApplicationEntity,
   ApplicationService,
+  OrganizationRoleEntity,
+  OrganizationRoleService,
 };

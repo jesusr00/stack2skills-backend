@@ -1,11 +1,12 @@
 import {
-  BaseEntity,
+  
   Column,
   PrimaryGeneratedColumn,
   Entity,
   OneToOne,
 } from 'typeorm';
 import RepositorySource from '../repository-source/repository-source.entity';
+import BaseEntity from '../base.entity';
 
 @Entity()
 class Application extends BaseEntity {

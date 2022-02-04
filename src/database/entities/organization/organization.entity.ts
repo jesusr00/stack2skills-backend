@@ -1,11 +1,14 @@
 import {
-  BaseEntity,
   Column,
   PrimaryGeneratedColumn,
   Entity,
   OneToMany,
+  ManyToMany,
 } from 'typeorm';
 import RepositorySource from '../repository-source/repository-source.entity';
+import BaseEntity from '../base.entity';
+import Account from '../account/account.entity';
+import { OrganizationRoleEntity } from '../organization-role';
 
 @Entity()
 class Organization extends BaseEntity {
@@ -15,7 +18,7 @@ class Organization extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description?: string;
 
   @OneToMany(
@@ -23,6 +26,9 @@ class Organization extends BaseEntity {
     (repositorySource) => repositorySource.organization,
   )
   repositorySources: RepositorySource[];
+
+  @OneToMany(() => OrganizationRoleEntity, (orgRole) => orgRole.organization)
+  rolesAssociated: OrganizationRoleEntity[];
 }
 
 export default Organization;

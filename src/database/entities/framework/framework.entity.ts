@@ -1,4 +1,5 @@
-import { BaseEntity, Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
+import BaseEntity from '../base.entity';
 
 @Entity()
 class Framework extends BaseEntity {

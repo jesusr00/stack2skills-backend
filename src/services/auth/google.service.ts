@@ -21,7 +21,7 @@ export default class GoogleService {
     let account: Account;
 
     if (await this.accountService.existByEmail(email)) {
-      account = await this.accountService.findOne(email);
+      account = await this.accountService.findByEmail(email);
     } else {
       account = await this.accountService.create({
         email,
