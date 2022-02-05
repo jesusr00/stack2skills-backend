@@ -16,6 +16,10 @@ class CreateApplicationDto {
   @ApiProperty()
   @IsNotEmpty()
   framework: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  project: string;
 }
 
 export default CreateApplicationDto;

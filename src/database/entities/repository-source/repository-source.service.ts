@@ -4,7 +4,6 @@ import { REPOSITORYS_SOURCE_REPOSITORY } from './repository-source.provider';
 import RepositorySource from './repository-source.entity';
 import CreateRepositorySourceDto from '~/dtos/create-repository-source.dto';
 
-
 @Injectable()
 class RepositoryService {
   constructor(
@@ -20,9 +19,26 @@ class RepositoryService {
     return await this.repository.findOne({ where: { id: repoId } });
   }
 
+  findAllByOrganizationId(organization: string) {
+    return this.repository.find({
+      relations: ['organization'],
+      where: {
+        organization: {
+          id: organization,
+        },
+      },
+    });
+  }
+
   //async delete(): Promise<boolean> {}
 
-  async create(dto: CreateRepositorySourceDto): Promise<RepositorySource> {
+  async create(
+    dto: CreateRepositorySourceDto | RepositorySource,
+  ): Promise<RepositorySource> {
+    if (dto instanceof RepositorySource) {
+      return await this.repository.save(dto);
+    }
+
     const repository = this.repository.create(dto);
     return await this.repository.save(repository);
   }

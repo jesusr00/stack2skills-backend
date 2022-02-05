@@ -9,6 +9,7 @@ import RepositorySource from '../repository-source/repository-source.entity';
 import BaseEntity from '../base.entity';
 import Account from '../account/account.entity';
 import { OrganizationRoleEntity } from '../organization-role';
+import { ProjectEntity } from '..';
 
 @Entity()
 class Organization extends BaseEntity {
@@ -29,6 +30,9 @@ class Organization extends BaseEntity {
 
   @OneToMany(() => OrganizationRoleEntity, (orgRole) => orgRole.organization)
   rolesAssociated: OrganizationRoleEntity[];
+
+  @OneToMany(() => ProjectEntity, (project) => project.organization)
+  projects: ProjectEntity[];
 }
 
 export default Organization;

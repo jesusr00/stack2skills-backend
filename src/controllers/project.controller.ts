@@ -12,19 +12,21 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
-import { OrganizationService } from '~/database/entities';
-import { RepositorySourceService } from '~/database/entities/repository-source';
-import RepositorySource from '~/database/entities/repository-source/repository-source.entity';
-import CreateRepositorySourceDto from '~/dtos/create-repository-source.dto';
+import {
+  OrganizationService,
+  ProjectEntity,
+  ProjectService,
+} from '~/database/entities';
+import CreateProjectDto from '~/dtos/create-project.dto';
 import { JwtAuthGuard } from '~/modules/auth/guards/jwt-auth.guard';
 
-@Controller('repository')
+@Controller('project')
 @UseGuards(JwtAuthGuard)
-@ApiTags('Repository')
-class RepositorySourceController {
+@ApiTags('Project')
+class ProjectController {
   constructor(
-    private repositorySourceService: RepositorySourceService,
     private organizationService: OrganizationService,
+    private projectService: ProjectService,
   ) {}
 
   @Get()
@@ -44,19 +46,20 @@ class RepositorySourceController {
       });
     }
 
-    var repositoriesSources =
-      await this.repositorySourceService.findAllByOrganizationId(organization);
-    return res.json(repositoriesSources);
+    var projects = await this.projectService.findAllByOrganization(
+      organization,
+    );
+    return res.json(projects);
   }
 
   @Get('/:id')
   findById(@Param('id') id: string) {
-    return this.repositorySourceService.findbyId(id);
+    return this.projectService.findById(id);
   }
 
   @Post()
   async create(
-    @Body() body: CreateRepositorySourceDto,
+    @Body() body: CreateProjectDto,
     @Query('organization') organization: string,
     @Req() req: Request,
   ) {
@@ -66,15 +69,13 @@ class RepositorySourceController {
       user.id,
     );
 
-    const newRepositorySource = new RepositorySource();
-    newRepositorySource.accessToken = body.accessToken;
-    newRepositorySource.name = body.name;
-    newRepositorySource.url = body.url;
-    newRepositorySource.type = body.type;
-    newRepositorySource.organization = organizationEntity;
+    const newProject = new ProjectEntity();
+    newProject.name = body.name;
+    newProject.description = body.description;
+    newProject.organization = organizationEntity;
 
-    return this.repositorySourceService.create(newRepositorySource);
+    return this.projectService.create(newProject);
   }
 }
 
-export default RepositorySourceController;
+export default ProjectController;

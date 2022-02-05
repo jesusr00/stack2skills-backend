@@ -24,6 +24,7 @@ class RepositoryService {
     });
   }
 
+
   async findById(organizationId: string, accountId: string) {
     return this.getQueryBuilder()
       .innerJoinAndSelect('organization.rolesAssociated', 'rolesAssociated')

@@ -15,6 +15,7 @@ import OrganizationRoleModule, {
   OrganizationRoleEntity,
   OrganizationRoleService,
 } from './organization-role';
+import ProjectModule, { ProjectEntity, ProjectService } from './project';
 import OrganizationModule from './organization/organization.module';
 import OrganizationEntity from './organization/organization.entity';
 import OrganizationService from './organization/organization.service';
@@ -26,6 +27,7 @@ export default [
   FrameworkModule,
   ApplicationModule,
   OrganizationRoleModule,
+  ProjectModule,
 ];
 
 export {
@@ -41,4 +43,6 @@ export {
   ApplicationService,
   OrganizationRoleEntity,
   OrganizationRoleService,
+  ProjectEntity,
+  ProjectService,
 };

@@ -15,8 +15,8 @@ class FrameworkService {
     return await this.repository.find();
   }
 
-  async findbyId(repoId: string): Promise<Framework | undefined> {
-    return await this.repository.findOne({ where: { id: repoId } });
+  findById(id: string): Promise<Framework | undefined> {
+    return this.repository.findOne({ where: { id } });
   }
 
   //async delete(): Promise<boolean> {}
