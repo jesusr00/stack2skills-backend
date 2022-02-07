@@ -65,7 +65,7 @@ class ApplicationController {
       });
     }
 
-    return result;
+    return res.json(result);
   }
 
   @Post()
