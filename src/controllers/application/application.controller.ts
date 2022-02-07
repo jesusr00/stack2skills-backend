@@ -114,7 +114,8 @@ class ApplicationController {
     obj.framework = framework;
     obj.project = project;
 
-    return this.applicationService.create(obj);
+    const respose = await this.applicationService.create(obj);
+    return res.json(respose);
   }
 }
 
