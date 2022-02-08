@@ -12,7 +12,7 @@ env:
   REGISTRY_BASE: us-east1-docker.pkg.dev/${{ secrets.PROJECT_ID }}
   NODE_ENV: staging
   URL: https://staging-stack2skills-yfmnwrj6gq-ue.a.run.app/
-  FRONTEND: http://localhost:3000/
+  FRONTEND: https://staging-stack2skills-frontend-dot-cic-platform.ue.r.appspot.com/
   JWT_SECRET: palabrarandom
 
 jobs:
